@@ -31,7 +31,9 @@ class App extends Component {
           return Promise.reject(new Error(`Something went wrong; ${res.statusCode}`));
         }
       })
-      .then(response => {this.setState({list:response.items})
+      .then(response => {
+        window.resp = response;
+        this.setState({list:response.items})
       console.log(response);
     })
       
@@ -46,9 +48,7 @@ class App extends Component {
           </div>
           <Search handleSearch={this.updateSearchTerm}/>
           <Filter/>
-          <List>
-            {'this is a list'}
-          </List>
+          <List list={this.state.list}/>
           
       </div>
     );
