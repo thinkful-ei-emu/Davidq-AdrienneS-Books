@@ -14,7 +14,8 @@ class App extends Component {
         filter: '',
         printType: 'all',
       },
-      error: null
+      error: null,
+      show: null
     };
   }
   updateSearchTerm = (term) => {
@@ -25,7 +26,9 @@ class App extends Component {
     this.setState({filters: {...this.state.filters, ...filter}}, this.doFetch);
   }
 
-  
+  showMore = (bookId) => {
+    this.setState({show: bookId})
+  }
 
   doFetch(){
     const endpoint = `https://www.googleapis.com/books/v1/volumes?q=${this.state.searchTerm}`;
@@ -62,7 +65,7 @@ class App extends Component {
           </div>
           <Search handleSearch={this.updateSearchTerm}/>
           <Filter handleFilter={this.handleFilterChange}/>
-          <List list={this.state.list}/>
+          <List list={this.state.list} showMore={this.showMore} show={this.state.show}/>
           
       </div>
     );
