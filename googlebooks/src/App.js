@@ -11,15 +11,33 @@ class App extends Component {
       list:[],
       searchTerm : '',
       filters :[],
+      error: null
     };
   }
   updateSearchTerm = (term) =>{
-    this.setState({searchTerm:term});
-
+    this.setState({searchTerm:term}, this.doFetch); 
   }
-  componentDidMount(){
 
+
+
+  doFetch(){
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${this.state.searchTerm}`;
+    console.log(url);
+    fetch (url)
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return Promise.reject(new Error(`Something went wrong; ${res.statusCode}`));
+        }
+      })
+      .then(response => {this.setState({list:response.items})
+      console.log(response);
+    })
+      
+      .catch((error) => {this.setState({error:error.message})});
   }
+
   render() {
     return (
       <div className="App">
