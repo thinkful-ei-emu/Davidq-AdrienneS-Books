@@ -5,7 +5,7 @@ export default function Search(props){
 
 
   return (
-    <form onSubmit={(e)=>{
+    <form className="col-full" onSubmit={(e)=>{
       e.preventDefault();
       console.log(document.getElementById('searchBar').value);
       props.handleSearch(encodeURIComponent(document.getElementById('searchBar').value));

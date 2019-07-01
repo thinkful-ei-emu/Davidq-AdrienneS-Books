@@ -10,7 +10,7 @@ export default class Filter extends React.Component{
 
   render(){
   return (
-    <div>
+    <div className="col-full">
       <label htmlFor='print-type'>Print type:</label>
       <select name='print-type' onChange={(e) => this.filterChange({printType: e.target.value})}> 
         <option value='all'>All</option>

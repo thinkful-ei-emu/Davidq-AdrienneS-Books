@@ -56,8 +56,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">     
+      <div className="App container">
+        <div className="App-header col-full">     
           <h1>Google Book Search</h1>
           </div>
           <Search handleSearch={this.updateSearchTerm}/>

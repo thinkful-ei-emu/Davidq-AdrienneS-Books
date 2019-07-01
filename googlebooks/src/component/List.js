@@ -4,11 +4,13 @@ import Book from './Book';
 export default function List(props){
 
   let books= props.list.map((book,index)=>{
-    return <Book key={index} name={book.volumeInfo.title} authors={book.volumeInfo.authors} price={book.saleInfo.listPrice ? book.saleInfo.listPrice.amount : 0 } shortDesc={book.searchInfo.textSnippet} desc={book.volumeInfo.description} img={book.volumeInfo.imageLinks.thumbnail}/>;
+    let tempDiv = document.createElement('p');// to remove html encoding
+    book.searchInfo ?  tempDiv.innerHTML = book.searchInfo.textSnippet: tempDiv.innerHTML = "No Description found";
+    return <Book key={index} name={book.volumeInfo.title} authors={book.volumeInfo.authors} price={book.saleInfo.listPrice ? book.saleInfo.listPrice.amount : 0 } shortDesc={tempDiv.innerHTML} desc={book.volumeInfo.description} img={book.volumeInfo.imageLinks.thumbnail}/>;
   });
 
   return (
-    <div>
+    <div className="col-center container">
       {books}
     </div>
   );
