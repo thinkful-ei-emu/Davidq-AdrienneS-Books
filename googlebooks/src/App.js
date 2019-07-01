@@ -1,18 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Search from './component/Search';
+import Filter from './component/Filter';
+import List from './component/List';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state= {
+      list:[],
+      searchTerm : '',
+      filters :[],
+    };
+  }
+  updateSearchTerm = (term) =>{
+    this.setState({searchTerm:term});
+
+  }
+  componentDidMount(){
+
+  }
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="App-header">     
+          <h1>Google Book Search</h1>
+          </div>
+          <Search handleSearch={this.updateSearchTerm}/>
+          <Filter/>
+          <List>
+            {'this is a list'}
+          </List>
+          
       </div>
     );
   }
