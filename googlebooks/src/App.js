@@ -10,18 +10,32 @@ class App extends Component {
     this.state= {
       list:[],
       searchTerm : '',
-      filters :[],
+      filters:{
+        filter: '',
+        printType: 'all',
+      },
       error: null
     };
   }
-  updateSearchTerm = (term) =>{
+  updateSearchTerm = (term) => {
     this.setState({searchTerm:term}, this.doFetch); 
   }
 
+  handleFilterChange = (filter) => {
+    this.setState({filters: {...this.state.filters, ...filter}}, this.doFetch);
+  }
 
+  
 
   doFetch(){
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${this.state.searchTerm}`;
+    const endpoint = `https://www.googleapis.com/books/v1/volumes?q=${this.state.searchTerm}`;
+    const url= endpoint + '&' + Object.entries(this.state.filters).map(arr => {
+      if(arr[1] === '') {
+        return '';
+      } else {
+        return arr.join('=');
+      }
+    }).join('&');
     console.log(url);
     fetch (url)
       .then(res => {
@@ -47,7 +61,7 @@ class App extends Component {
           <h1>Google Book Search</h1>
           </div>
           <Search handleSearch={this.updateSearchTerm}/>
-          <Filter/>
+          <Filter handleFilter={this.handleFilterChange}/>
           <List list={this.state.list}/>
           
       </div>

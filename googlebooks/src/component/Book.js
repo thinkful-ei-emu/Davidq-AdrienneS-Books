@@ -8,7 +8,7 @@ export default function Book(props){
       <img src={props.img}/>
       <h1>{props.name}</h1>
       <p>Price: ${props.price}</p>
-      <p>{props.desc}</p>
+      <p>{props.shortDesc}</p>
       
       
     </div>

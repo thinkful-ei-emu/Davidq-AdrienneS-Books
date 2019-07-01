@@ -8,7 +8,7 @@ export default function Search(props){
     <form onSubmit={(e)=>{
       e.preventDefault();
       console.log(document.getElementById('searchBar').value);
-      props.handleSearch(document.getElementById('searchBar').value);
+      props.handleSearch(encodeURIComponent(document.getElementById('searchBar').value));
     }}>
       <label htmlFor="searchBar">Search:</label>
       <input id="searchBar" name="searchBar" type="text" placeholder="Dr. Suese"/>
